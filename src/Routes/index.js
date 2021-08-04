@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {Post} from '../Controllers/Global/UserController';
-import {Login} from '../Controllers/Global/AuthController';
+import {Login, LoginPool} from '../Controllers/Global/AuthController';
 
 
 const routes = Router();

@@ -24,7 +24,6 @@ export async function Login(req, res) {
     const loginValidate =
       "SELECT username, password, cro, registration, sex, course, typeuser FROM usuario WHERE username = $1 and (password = $2 or cro = $3);";
     User = await client.query(loginValidate, [username, password, cro]);
-    console.log(User);
     if (User.rowCount == 0 || User == undefined || User == null) {
         await client.end();
       res.json({ message: "Login incorreto" });
