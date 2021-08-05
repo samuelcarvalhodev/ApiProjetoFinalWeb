@@ -35,3 +35,46 @@ export async function Post(req, res) {
 }
 
 
+
+export async function GetAll(req, res) {
+  
+  await client.connect();
+  try {
+    const listAllOpcao = "SELECT * FROM opcao;";
+
+    const opcao = await client.query(listAllOpcao);
+
+    
+    if (
+      opcao.rows.length == 0
+      )
+      return res.json({ message: "Não existe nenhum correspondente" });
+      
+      await client.end();
+    return res.json({ Option: opcao.rows });
+  } catch (error) {
+    return res.json({ message: "Não existe nenhum correspondente" });
+  }
+}
+
+export async function GetById(req, res) {
+  
+  await client.connect();
+  try {
+    const { id } = req.params;
+
+    const listOpcao = "SELECT * FROM opcao WHERE id = $1;";
+
+    const opcao = await client.query(listOpcao, [id]);
+    
+    if (
+      opcao.rows.length == 0
+      )
+      return res.json({ message: "Não existe nenhum correspondente" });
+      await client.end();
+
+      return res.json({ Option: opcao.rows });
+  } catch (error) {
+    return res.json({ message: "Não existe nenhum correspondente" });
+  }
+}
