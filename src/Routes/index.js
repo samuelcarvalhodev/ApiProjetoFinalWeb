@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {Post} from '../Controllers/Global/UserController';
+import {GetAll, GetById, Post} from '../Controllers/Global/UserController';
 import {Login} from '../Controllers/Global/AuthController';
 import Option from './Public/option.routes';
 import Evaluation from './Public/evaluation.routes';
@@ -11,12 +11,9 @@ routes.use("/option", Option);
 routes.use("/evaluation", Evaluation);
 routes.use("/menu", Menu);
 
-routes.get("/", (get)=>{
-    console.log("Conexão bem sucedida!");
-})
-
 routes.post("/", Post);
-// routes.get("/", Get);
+routes.get("/", GetAll)
+routes.get("/:id", GetById)
 routes.post("/login", Login);
 
 
