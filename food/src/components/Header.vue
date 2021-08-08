@@ -4,14 +4,19 @@
         <p>UFCFood</p>
       </div>
       <div class="btn">
-          <button>Sair</button>
+          <button @click="goLogin">Sair</button>
       </div>
   </header>
 </template>
 
 <script>
 export default {
-    name: 'Header'
+    name: 'Header',
+    methods: {
+        goLogin(){
+            this.$router.push('/')
+        }
+    }
 }
 </script>
 
