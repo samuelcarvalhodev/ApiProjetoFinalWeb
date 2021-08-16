@@ -2,11 +2,12 @@ import client from "../../../db_config";
 
 export async function Login(req, res) {
   const { registration, password, cro } = req.body;
-  let User = null;
- 
+  
+  let User = null; 
 
   const registrationValidate =
     "SELECT registration FROM usuario WHERE registration = $1";
+  
   const registrationResponse = await client.query(registrationValidate, [
     registration,
   ]);

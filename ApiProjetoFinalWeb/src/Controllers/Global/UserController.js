@@ -39,38 +39,28 @@ export async function Post(req, res) {
     typeUser,
   ]);
 
-  
-
-  return res.status(200).json({message: "Cadastrado com sucesso" });}
-
-
+  return res.status(200).json({message: "Cadastrado com sucesso" });
+}
 
 export async function GetAll(req, res) {
-  
-  
-
   try {
     const listAllUsuario = "SELECT * FROM usuario;";
 
     const usuario = await client.query(listAllUsuario);
-
     
     if (
       usuario.rows.length == 0
-      )
-      return res.json({ message: "Não existe nenhum correspondente" });
+    )
+    return res.json({ message: "Não existe nenhum correspondente" });
       
       
-      return res.json({ Usuario: usuario.rows });
-    } catch (error) {
-      return res.json({ message: "Não existe nenhum correspondente" });
-    }
-  
+    return res.json({ Usuario: usuario.rows });
+  } catch (error) {
+    return res.json({ message: "Não existe nenhum correspondente" });
+  } 
 }
 
 export async function GetById(req, res) {
-  
-  
   try {
     const { id } = req.params;
 
@@ -80,10 +70,8 @@ export async function GetById(req, res) {
     
     if (
       usuario.rows.length == 0
-      )
-      return res.json({ message: "Não existe nenhum correspondente" });
-      
-      
+    )
+    return res.json({ message: "Não existe nenhum correspondente" });     
 
     return res.json({ Usuario: usuario.rows });
   } catch (error) {

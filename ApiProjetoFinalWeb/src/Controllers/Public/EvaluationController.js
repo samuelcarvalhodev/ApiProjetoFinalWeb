@@ -11,8 +11,6 @@ export async function Post(req, res) {
     user_id,
   } = req.body;
 
-
-
   const registerEvaluation =
     "INSERT INTO avaliacao (evaluation_type , evaluation_grade , menu_items_id, commentary , evaluation_date , user_id) VALUES ($1,$2,$3,$4,$5,$6)";
 
@@ -25,36 +23,27 @@ export async function Post(req, res) {
     user_id,
   ]);
 
-
-
   res.json({message: "Cadastro efetuado com sucesso!" });
 }
 
-
 export async function GetAll(req, res) {
-  
-
   try {
     const listAllAvaliacao = "SELECT * FROM avaliacao;";
 
     const avaliacao = await client.query(listAllAvaliacao);
-
-    
+   
     if (
       avaliacao.rows.length == 0
-      )
-      return res.json({ message: "Não existe nenhum correspondente" });
-      
-    
-      return res.json({ Avaliacao: avaliacao.rows });
+    )
+    return res.json({ message: "Não existe nenhum correspondente" });
+          
+    return res.json({ Avaliacao: avaliacao.rows });
   } catch (error) {
     return res.json({ message: "Não existe nenhum correspondente" });
   }
 }
 
 export async function GetById(req, res) {
-  
-
   try {
     const { id } = req.params;
 
@@ -64,16 +53,11 @@ export async function GetById(req, res) {
     
     if (
       avaliacao.rows.length == 0
-      )
-      return res.json({ message: "Não existe nenhum correspondente" });
+    )
+    return res.json({ message: "Não existe nenhum correspondente" });
       
-      
-    
     return res.json({ Avaliacao: avaliacao.rows });
   } catch (error) {
     return res.json({ message: "Não existe nenhum correspondente" });
   }
 }
-
-
-
