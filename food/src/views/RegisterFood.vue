@@ -5,19 +5,17 @@
                   <form action="" name="cardapio_form" @submit="finish" >
                       <div class="form-div">
                           <label for="tipOpcao">Informe o tipo de opção:</label>
-                          <!-- <input type="text" name="tipOpcao" id="tipOpcao" v-model="opcao" required> -->
                           <select name="" id="" v-model="type_option">
-                            <option value="">PROTEINA VEGETARIANA</option>
+                            <option value="PROTEINA VEGETARIANA">PROTEINA VEGETARIANA</option>
                             <option value="PROTEINA">PROTEINA</option>
-                            <option value="">FRUTA</option>
-                            <option value="">CARBOIDRATO</option>
+                            <option value="FRUTA">FRUTA</option>
+                            <option value="CARBOIDRATO">CARBOIDRATO</option>
 
 
                           </select>
                           
                         <br>
                           <label for="opcao">Informe a opção:</label>
-                          <!-- <input type="text" name="opcao" id="opcao" v-model="opcao" required> -->
                           <select name="" id="" v-model="option_name" @click="getOption">
                               <option v-for="opt of options" v-bind:value="opt.option_name" :key="opt.id">{{opt.option_name}}</option>
                           </select>
@@ -28,7 +26,8 @@
                           <input type="date" v-model="date_menu">
                       </div>
                       <div class="button-div">
-                         <button type="submit">Cadastrar</button>
+                         <!-- <button type="submit">Cadastrar</button> -->
+                         <PrimaryButton type="submit" placeholder="Cadastrar"/>
                       </div>
                   </form>
               </div>
@@ -36,11 +35,14 @@
 </template>
 
 <script>
-// import PrimaryButton from '@/components/PrimaryButton.vue';
+import PrimaryButton from '@/components/PrimaryButton.vue';
 import api from '@/services/api.js';
 
 export default {
     name: 'RegisterFood',
+    components:{
+        PrimaryButton
+    } ,
     data(){
         return{
             type_option: null,
@@ -82,7 +84,7 @@ export default {
 
             }
             const res = await api.post('/menu/', data);
-            if(res.data.message === 'Cadastro efetuado com sucesso'){
+            if(res.data.message === 'Cadastro efetuado com sucesso!'){
                 console.log(res.data);
                 this.$router.push('/dashboard')
             }

@@ -25,15 +25,17 @@
                         <input type="text" name="username" id="username" v-model="registration" required >
 
                     </div>
+                    <label for="">Sexo: </label>
                     <select v-model="SexUser">
-                        <option disabled value="">Sexo</option>
+                        <option value="" disabled>Selecione um sexo</option>
                         <option >Masculino</option>
                         <option >Feminino</option>
                         <option >Outro</option>
                     </select>
 
+                    <label for="">Curso: </label>
                     <select v-model="CourseUser">
-                        <option disabled value="">Curso</option>
+                        <option disabled value="">Selecione um curso</option>
                         <option >CC</option>
                         <option >SI</option>
                         <option >Eng.Minas</option>
@@ -104,7 +106,7 @@ export default {
     async createUser(){
         const data = {
             username: this.username,
-            password: this.pswd,
+            password: this.password,
             cro: this.cro,
             registration: this.registration,
             sex: this.SexUser,
@@ -129,7 +131,7 @@ p,label, span{
 .main-body{
     background-color: #0da3e93b;
     height: 100vh;
-    padding: 10%;
+    padding: 5% ;
     margin: auto;
 }
 
@@ -141,7 +143,7 @@ p,label, span{
     background-color: #F7F7F7;
     border-radius: 10px;
     width: 80%;
-    height: 70vh;
+    height: 85vh;
     margin: auto;
     padding: 2%;
     color: #333;
