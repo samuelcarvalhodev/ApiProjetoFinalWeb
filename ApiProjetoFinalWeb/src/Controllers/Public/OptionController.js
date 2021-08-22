@@ -66,3 +66,66 @@ export async function GetById(req, res) {
     return res.json({ message: "Não existe nenhum correspondente" });
   }
 }
+
+export async function Dell(req, res){
+  try {
+    const { id } = req.params;
+
+    const deleteOpcao = "DELETE FROM opcao WHERE id = $1;";
+
+    const opcao = await client.query(deleteOpcao, [id]);
+
+    if(opcao.rowCount == 0){
+      return res.json({message: "Não existe nenhuma opcao correspondente"});
+    } else{
+      return res.json({message: "Deletado com sucesso"})
+    }
+  } catch (error) {
+    return res.json({message: "Não existe nenhum ccorrespondente"});
+  }
+}
+
+export async function Edit(req, res){
+  try {
+    const { id } = req.params;
+    const { 
+      option_name,
+      description,
+      energetic_value,
+      carbohydrate,
+      protein,
+      total_fat,
+      image_food,
+      type_option } = req.body;
+
+    const updateOpcao = `UPDATE opcao SET 
+    option_name = $1,
+    description = $2,
+    energetic_value = $3,
+    carbohydrate = $4,
+    protein = $5,
+    total_fat = $6,
+    image_food = $7,
+    type_option = $8 WHERE id = $9`;
+
+    const opcao = await client.query(updateOpcao, [
+      option_name,
+      description,
+      energetic_value,
+      carbohydrate,
+      protein,
+      total_fat,
+      image_food,
+      type_option, 
+      id
+    ])
+    
+    if(opcao.rowCount == 0){
+      return res.json({message: "Não existe nenhuma opcao correspondente"});
+    } else{
+      return res.json({message: "Opcao atualizado com sucesso"})
+    }
+  } catch (error) {
+    return res.json({message: "Não existe nenhum correspondente"});
+  }
+}
