@@ -78,3 +78,52 @@ export async function GetById(req, res) {
     return res.json({ message: "Não existe nenhum correspondente" });
   }
 }
+
+export async function Dell(req, res){
+  try {
+    const { id } = req.params;
+
+    const deleteUsuario = "DELETE FROM usuario WHERE id = $1;";
+
+    const usuario = await client.query(deleteUsuario, [id]);
+
+    if(usuario.rowCount == 0){
+      return res.json({message: "Não existe nenhum usuario correspondente"});
+    } else{
+      return res.json({message: "Deletado com sucesso"})
+    }
+  } catch (error) {
+    return res.json({message: "Não existe nenhum ccorrespondente"});
+  }
+}
+
+export async function Edit(req, res){
+  try {
+    const { id } = req.params;
+    const { username, password, cro, registration, sex, course, typeUser } =
+    req.body;
+
+    const updateUsuario = `UPDATE usuario SET 
+    username = $1, password = $2, cro = $3, registration = $4, sex = $5, course = $6, 
+    typeuser = $7 WHERE id = $8`;
+
+    const usuario = await client.query(updateUsuario, [
+      username, 
+      password, 
+      cro, 
+      registration, 
+      sex, 
+      course, 
+      typeUser, 
+      id
+    ])
+    
+    if(usuario.rowCount == 0){
+      return res.json({message: "Não existe nenhum usuario correspondente"});
+    } else{
+      return res.json({message: "Usuario atualizado com sucesso"})
+    }
+  } catch (error) {
+    return res.json({message: "Não existe nenhum correspondente"});
+  }
+}
