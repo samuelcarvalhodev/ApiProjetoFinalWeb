@@ -1,3 +1,4 @@
+require('dotenv').config();
 import pg from "pg";
 
 const client = new pg.Pool({
