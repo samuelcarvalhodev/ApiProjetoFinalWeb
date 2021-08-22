@@ -61,3 +61,62 @@ export async function GetById(req, res) {
     return res.json({ message: "Não existe nenhum correspondente" });
   }
 }
+
+export async function Dell(req, res){
+  try {
+    const { id } = req.params;
+
+    const deleteAvaliacao = "DELETE FROM avaliacao WHERE id = $1;";
+
+    const avaliacao = await client.query(deleteAvaliacao, [id]);
+
+    if(avaliacao.rowCount == 0){
+      return res.json({message: "Não existe nenhuma avaliação correspondente"});
+    } else{
+      return res.json({message: "Deletado com sucesso"})
+    }
+  } catch (error) {
+    return res.json({message: "Não existe nenhum correspondente"});
+  }
+}
+
+export async function Edit(req, res){
+  try {
+    const { id } = req.params;
+    const { 
+      evaluation_type,
+      evaluation_grade,
+      menu_items_id,
+      commentary,
+      evaluation_date,
+      user_id } = req.body;
+
+    const updateAvaliacao = `UPDATE avaliacao SET 
+    evaluation_type = $1,
+    evaluation_grade = $2,
+    menu_items_id = $3,
+    commentary = $4,
+    evaluation_date = $5,
+    user_id = $6 WHERE id = $7`;
+      
+    const avaliacao = await client.query(updateAvaliacao, [
+      evaluation_type,
+      evaluation_grade,
+      menu_items_id,
+      commentary,
+      evaluation_date,
+      user_id,
+      id
+    ]);
+
+    console.log(avaliacao)
+    
+    if(avaliacao.rowCount == 0){
+      return res.json({message: "Não existe nenhuma avaliação correspondente"});
+    } else{
+      return res.json({message: "Avaliação atualizado com sucesso"})
+    }
+  } catch (error) {
+    return res.json({message: "Não existe nenhum correspondente"});
+  }
+}

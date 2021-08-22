@@ -93,7 +93,7 @@ export async function Dell(req, res){
       return res.json({message: "Deletado com sucesso"})
     }
   } catch (error) {
-    return res.json({message: "Não existe nenhum ccorrespondente"});
+    return res.json({message: "Não existe nenhum correspondente"});
   }
 }
 
