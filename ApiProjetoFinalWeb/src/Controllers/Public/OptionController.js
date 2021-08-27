@@ -129,3 +129,22 @@ export async function Edit(req, res){
     return res.json({message: "Não existe nenhum correspondente"});
   }
 }
+
+export async function Quantidade(req, res){
+  try {
+    const {quantidade} = req.params;
+
+    const listQuantidade = `SELECT * FROM opcao LIMIT $1`;
+
+    const opcao = await client.query(listQuantidade, [quantidade]);
+
+    if (
+      opcao.rows.length == 0
+    )
+    return res.json({ message: "Não existe nenhum correspondente" });
+        
+    return res.json({ opcao: opcao.rows });
+  } catch (error) {
+    return res.json({messge: "Nao existe nenhum correspondente"});
+  }
+}

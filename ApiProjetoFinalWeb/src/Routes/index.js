@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {GetAll, GetById, Post, Dell, Edit} from '../Controllers/Global/UserController';
+import {GetAll, GetById, Post, Dell, Edit, Quantidade} from '../Controllers/Global/UserController';
 import {Login} from '../Controllers/Global/AuthController';
 import Option from './Public/option.routes';
 import Evaluation from './Public/evaluation.routes';
@@ -17,5 +17,6 @@ routes.get("/:id", GetById)
 routes.post("/login", Login);
 routes.delete("/:id", Dell);
 routes.put("/:id", Edit);
+routes.get("/quantidade/:quantidade", Quantidade);
 
 export default routes;
