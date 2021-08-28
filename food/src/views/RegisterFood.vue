@@ -26,7 +26,6 @@
                           <input type="date" v-model="date_menu">
                       </div>
                       <div class="button-div">
-                         <!-- <button type="submit">Cadastrar</button> -->
                          <PrimaryButton type="submit" placeholder="Cadastrar"/>
                       </div>
                   </form>
@@ -153,7 +152,6 @@ input:focus{
 }
 
 .center-div .button-div{
-    /* border: 1px solid #000; */
     margin-top: 1%;
     width: 70%;
     margin-right: auto;

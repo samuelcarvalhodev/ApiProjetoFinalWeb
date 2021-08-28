@@ -6,6 +6,7 @@ import Dashboard from '@/views/Dashboard';
 import Rating from '@/views/Rating';
 import RegisterFood from '@/views/RegisterFood.vue';
 import ShowSelected from '@/views/MenuDetails.vue';
+import UpdateMenu from '@/views/UpdateMenu.vue';
 
 const history = createWebHistory();
 const router = createRouter({
@@ -40,6 +41,11 @@ const router = createRouter({
       name: 'RegisterFood',
       path: '/register-food',
       component: RegisterFood
+    },
+    {
+      name: 'UpdateMenu',
+      path: '/update-menu',
+      component: UpdateMenu
     }
   ]
 })

@@ -60,7 +60,6 @@
 
                 </div>
                 <div class="button-div">
-                   <!-- <button type="submit" class="login-btn" @click="watchRegister">Finalizar cadastro</button> -->
                     <SecundaryButton placeholder="Finalizar cadastro" type="submit" />
                 </div>
             </form>
