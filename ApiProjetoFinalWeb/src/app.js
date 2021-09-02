@@ -4,7 +4,7 @@ import routes from './Routes';
 
 
 const app = express();
-
+app.use('/api/uploads', express.static('uploads'))
 app.use(express.json());
 
 app.use(cors());
