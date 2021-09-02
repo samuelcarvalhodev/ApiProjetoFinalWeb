@@ -9,7 +9,7 @@ async function createTables() {
   );
 
   await client.query(
-    "CREATE TYPE TypeAvaliacao AS ENUM('ELOGIO', 'RECLAMAÇÂO')"
+    "CREATE TYPE TypeAvaliacao AS ENUM('ELOGIO', 'RECLAMAÇÃO')"
   );
 
   await client.query(
@@ -41,7 +41,7 @@ async function createTables() {
   );
 
   await client.query(
-    "CREATE TABLE cardapio( id serial PRIMARY KEY UNIQUE NOT NULL, type_option TypeOption NULL, option_name VARCHAR(50) NULL, date_menu TIMESTAMP NULL, option_id INT NULL, image_food VARCHAR(100) NULL)"
+    "CREATE TABLE cardapio( id serial PRIMARY KEY UNIQUE NOT NULL, type_option TypeOption NULL, option_name VARCHAR(50) NULL, date_menu TIMESTAMP NULL, option_id INT NULL, image_food VARCHAR(500) NULL)"
   )
   
   
