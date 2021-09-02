@@ -27,7 +27,7 @@ export async function Post(req, res) {
     type_option
   ]);
 
-  res.json({message: "Cadastro efetuado com sucesso!" });
+  res.status(200).json({message: "Cadastro efetuado com sucesso!" });
 }
 
 export async function GetAll(req, res) { 
@@ -39,11 +39,11 @@ export async function GetAll(req, res) {
     if (
       opcao.rows.length == 0
     )
-    return res.json({ message: "Não existe nenhum correspondente" });
+    return res.status(404).json({ message: "Não existe nenhum correspondente" });
       
-    return res.json({ Option: opcao.rows });
+    return res.status(200).json({ Option: opcao.rows });
   } catch (error) {
-    return res.json({ message: "Não existe nenhum correspondente" });
+    return res.status(400).json({ message: "Não existe nenhum correspondente" });
   }
 }
 
@@ -58,16 +58,16 @@ export async function GetById(req, res) {
     if (
       opcao.rows.length == 0
     )
-    return res.json({ message: "Não existe nenhum correspondente" });
+    return res.status(404).json({ message: "Não existe nenhum correspondente" });
   
 
-    return res.json({ Option: opcao.rows });
+    return res.status(200).json({ Option: opcao.rows });
   } catch (error) {
-    return res.json({ message: "Não existe nenhum correspondente" });
+    return res.status(400).json({ message: "Não existe nenhum correspondente" });
   }
 }
 
-export async function Dell(req, res){
+export async function Delete(req, res){
   try {
     const { id } = req.params;
 
@@ -76,12 +76,12 @@ export async function Dell(req, res){
     const opcao = await client.query(deleteOpcao, [id]);
 
     if(opcao.rowCount == 0){
-      return res.json({message: "Não existe nenhuma opcao correspondente"});
+      return res.status(404).json({message: "Não existe nenhuma opcao correspondente"});
     } else{
-      return res.json({message: "Deletado com sucesso"})
+      return res.status(200).json({message: "Deletado com sucesso"})
     }
   } catch (error) {
-    return res.json({message: "Não existe nenhum correspondente"});
+    return res.status(400).json({message: "Não existe nenhum correspondente"});
   }
 }
 
@@ -121,16 +121,16 @@ export async function Edit(req, res){
     ])
     
     if(opcao.rowCount == 0){
-      return res.json({message: "Não existe nenhuma opcao correspondente"});
+      return res.status(404).json({message: "Não existe nenhuma opcao correspondente"});
     } else{
-      return res.json({message: "Opcao atualizado com sucesso"})
+      return res.status(200).json({message: "Opcao atualizado com sucesso"})
     }
   } catch (error) {
-    return res.json({message: "Não existe nenhum correspondente"});
+    return res.status(400).json({message: "Não existe nenhum correspondente"});
   }
 }
 
-export async function Quantidade(req, res){
+export async function GetByQuantity(req, res){
   try {
     const {quantidade} = req.params;
 
@@ -141,10 +141,29 @@ export async function Quantidade(req, res){
     if (
       opcao.rows.length == 0
     )
-    return res.json({ message: "Não existe nenhum correspondente" });
+    return res.status(404).json({ message: "Não existe nenhum correspondente" });
         
-    return res.json({ opcao: opcao.rows });
+    return res.status(200).json({ opcao: opcao.rows });
   } catch (error) {
-    return res.json({messge: "Nao existe nenhum correspondente"});
+    return res.status(400).json({messge: "Nao existe nenhum correspondente"});
+  }
+}
+
+
+
+export async function GetByOptionName(req, res){
+  try {
+    const {type} = req.params;
+
+    const listByOptionName = `SELECT * FROM public.opcao WHERE option_name LIKE '%${type}%'`;
+
+    const opcao = await client.query(listByOptionName);
+
+    if (opcao.rows.length == 0){
+    return res.status(404).json({ message: "Não existe nenhum correspondente, verifique o nome e tente novamente!" });
+    }
+    return res.status(200).json({ Opcao: opcao.rows });
+  } catch (error) {
+    return res.status(400).json({error: "Nao existe nenhum correspondente"});
   }
 }
